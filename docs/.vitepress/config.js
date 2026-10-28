@@ -22,6 +22,12 @@ export default defineConfig({
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:title', content: 'SoloPHP' }],
     ['meta', { property: 'og:description', content: 'Small, independent PSR packages for PHP. Use one, or all of them together.' }],
+    // Link previews (LinkedIn, Slack, X) need an absolute URL to a raster image
+    ['meta', { property: 'og:image', content: 'https://solophp.github.io/og-image.png' }],
+    ['meta', { property: 'og:image:width', content: '1200' }],
+    ['meta', { property: 'og:image:height', content: '630' }],
+    ['meta', { property: 'og:image:alt', content: 'SoloPHP: small, independent PSR packages for PHP' }],
+    ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
   ],
 
   themeConfig: {
