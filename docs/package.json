@@ -1,0 +1,14 @@
+{
+  "name": "solophp-hub-docs",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "The SoloPHP hub at solophp.github.io",
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview"
+  },
+  "devDependencies": {
+    "vitepress": "^1.6.4"
+  }
+}

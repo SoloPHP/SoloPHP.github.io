@@ -1,0 +1,12 @@
+# Docs
+docs/node_modules/
+docs/package-lock.json
+docs/.vitepress/cache/
+docs/.vitepress/dist/
+
+# IDE
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
