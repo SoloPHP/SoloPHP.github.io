@@ -33,7 +33,9 @@ curl http://127.0.0.1:8000/tasks
 | `config/providers.php` | Service providers, in order. They register what the container cannot build by itself, such as the database connection, the logger and the validator. |
 | `config/middleware.php` | Global middleware, outermost first: errors, JSON bodies, routing. |
 | `config/routes.php` | Every route, one line per module. |
-| `src/Task/` | The module to copy: model, repository, inputs, controller, resource and routes. |
+| `src/Modules/Task/` | The module to copy: model, repository, inputs, controller, resource and routes, in one folder. |
+| `src/Modules/Home/` | A module of one class: an endpoint without a table, so it has no model, inputs or resource. |
+| `src/` | What the modules share: `Http/` (middleware, `JsonResponse`, exceptions), `Input/` (casters, processors, generators), `Support/`, `Validation/`, `Database/` and `Providers/`. |
 | `database/migrations/` | Forward-only migrations, applied in file name order. |
 | `tests/Feature/` | Tests that send requests through the whole application. |
 
@@ -98,14 +100,14 @@ composer migrate
 
 ### 2. The Model and the Repository
 
-A note is a readonly class, one row of the table. Create `src/Note/Note.php`:
+A note is a readonly class, one row of the table. Create `src/Modules/Note/Note.php`:
 
 ```php
 <?php
 
 declare(strict_types=1);
 
-namespace App\Note;
+namespace App\Modules\Note;
 
 use DateTimeImmutable;
 
@@ -121,14 +123,14 @@ final readonly class Note
 }
 ```
 
-The repository extends `Solo\Repository\Repository`. Its `Mapping` names the table, the type of each column and how a row becomes a `Note`; in return, `read()` gives `find()`, `findBy()` and `count()`, and `insertGetId()`, `update()` and `delete()` write. `create()` adds the timestamp, as `TaskRepository` does. Create `src/Note/NoteRepository.php`:
+The repository extends `Solo\Repository\Repository`. Its `Mapping` names the table, the type of each column and how a row becomes a `Note`; in return, `read()` gives `find()`, `findBy()` and `count()`, and `insertGetId()`, `update()` and `delete()` write. `create()` adds the timestamp, as `TaskRepository` does. Create `src/Modules/Note/NoteRepository.php`:
 
 ```php
 <?php
 
 declare(strict_types=1);
 
-namespace App\Note;
+namespace App\Modules\Note;
 
 use DateTimeImmutable;
 use Doctrine\DBAL\Connection;
@@ -175,14 +177,14 @@ No provider is needed: the constructor asks for the `Connection` that `DatabaseS
 
 ### 3. The Input
 
-An input class describes what a request may send. A field without a default is required, and one with a default may be left out; the rules in `#[Validate]` come from [solophp/validator](https://solophp.github.io/Validator/). Create `src/Note/Inputs/NoteStoreInput.php`:
+An input class describes what a request may send. A field without a default is required, and one with a default may be left out; the rules in `#[Validate]` come from [solophp/validator](https://solophp.github.io/Validator/). Create `src/Modules/Note/Inputs/NoteStoreInput.php`:
 
 ```php
 <?php
 
 declare(strict_types=1);
 
-namespace App\Note\Inputs;
+namespace App\Modules\Note\Inputs;
 
 use Solo\Input\Attributes\Input;
 use Solo\Input\Attributes\Validate;
@@ -204,14 +206,14 @@ When the body breaks a rule, building the input throws a `ValidationException`, 
 
 ### 4. The Controller and the Resource
 
-A resource decides how a note looks in a response, so the JSON keeps its shape when the table changes. Create `src/Note/NoteResource.php`:
+A resource decides how a note looks in a response, so the JSON keeps its shape when the table changes. Create `src/Modules/Note/NoteResource.php`:
 
 ```php
 <?php
 
 declare(strict_types=1);
 
-namespace App\Note;
+namespace App\Modules\Note;
 
 use DateTimeInterface;
 
@@ -239,18 +241,18 @@ final class NoteResource
 }
 ```
 
-The controller stays thin: it turns the request into an input, hands it to the repository and writes the result with `JsonResponse`. A missing note is thrown as `NotFoundException`, and `ErrorMiddleware` answers with a 404. Create `src/Note/NoteController.php`:
+The controller stays thin: it turns the request into an input, hands it to the repository and writes the result with `JsonResponse`. A row read by id goes through `Records::findOrFail()`, which throws `NotFoundException` when the table has no such row, and `ErrorMiddleware` answers with a 404. Create `src/Modules/Note/NoteController.php`:
 
 ```php
 <?php
 
 declare(strict_types=1);
 
-namespace App\Note;
+namespace App\Modules\Note;
 
-use App\Http\Exceptions\NotFoundException;
 use App\Http\JsonResponse;
-use App\Note\Inputs\NoteStoreInput;
+use App\Modules\Note\Inputs\NoteStoreInput;
+use App\Support\Records;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Solo\Input\InputFactory;
@@ -279,7 +281,7 @@ final readonly class NoteController
         ResponseInterface $response,
         array $params,
     ): ResponseInterface {
-        $note = $this->notes->read()->find((int) $params['id']) ?? throw new NotFoundException();
+        $note = Records::findOrFail($this->notes, (int) $params['id']);
 
         return JsonResponse::data($response, NoteResource::make($note));
     }
@@ -299,14 +301,14 @@ final readonly class NoteController
 
 ### 5. The Routes
 
-A module keeps its routes in its own class. Create `src/Note/NoteRoutes.php`:
+A module keeps its routes in its own class. Create `src/Modules/Note/NoteRoutes.php`:
 
 ```php
 <?php
 
 declare(strict_types=1);
 
-namespace App\Note;
+namespace App\Modules\Note;
 
 use Solo\Router\RouteCollector;
 
@@ -317,7 +319,7 @@ final class NoteRoutes
         $r->group('/notes', function (RouteCollector $r): void {
             $r->get('', [NoteController::class, 'index'])->name('notes.index');
             $r->post('', [NoteController::class, 'store'])->name('notes.store');
-            $r->get('/{id:\d+}', [NoteController::class, 'show'])->name('notes.show');
+            $r->get('/{id:[1-9][0-9]*}', [NoteController::class, 'show'])->name('notes.show');
         });
     }
 }
@@ -326,9 +328,9 @@ final class NoteRoutes
 Then add one line to `config/routes.php`:
 
 ```php
-use App\Home\HomeController;
-use App\Note\NoteRoutes; // [!code ++]
-use App\Task\TaskRoutes;
+use App\Modules\Home\HomeController;
+use App\Modules\Note\NoteRoutes; // [!code ++]
+use App\Modules\Task\TaskRoutes;
 use Solo\Router\RouteCollector;
 
 return function (RouteCollector $r): void {
@@ -339,7 +341,7 @@ return function (RouteCollector $r): void {
 };
 ```
 
-`{id:\d+}` matches digits only, so `/notes/abc` is a 404 from the router before any controller runs.
+`{id:[1-9][0-9]*}` matches a canonical id only, so `/notes/abc` and `/notes/007` are 404s from the router before any controller runs.
 
 ### 6. Try It
 
@@ -436,14 +438,14 @@ Each Solo package joins the application the same way: `composer require`, a prov
 composer require solophp/event-dispatcher
 ```
 
-An event is a plain object. Create `src/Note/NoteCreated.php`:
+An event is a plain object. Create `src/Modules/Note/NoteCreated.php`:
 
 ```php
 <?php
 
 declare(strict_types=1);
 
-namespace App\Note;
+namespace App\Modules\Note;
 
 final readonly class NoteCreated
 {
@@ -462,7 +464,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Note\NoteCreated;
+use App\Modules\Note\NoteCreated;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Log\LoggerInterface;
 use Solo\Contracts\Container\WritableContainerInterface;
@@ -539,6 +541,7 @@ The skeleton runs on MySQL and PostgreSQL too: set `DB_DRIVER` and the `DB_*` va
 ## Next Steps
 
 - `TaskIndexInput` and `TaskController::index()` in the skeleton show filters, search, sorting and pagination.
+- `GET /tasks/schema` answers with the input contract of `POST /tasks`, built from `TaskStoreInput` by `InputFactory::schema()`.
 - [Input](https://solophp.github.io/Input/): casters, processors, nested inputs and partial updates.
 - [Repository](https://solophp.github.io/Repository/): criteria, relations, translations and transactions.
 - [Router](https://solophp.github.io/Router/) and [Application](https://solophp.github.io/Application/): route groups and middleware, the request lifecycle and the route cache.

@@ -8,7 +8,7 @@ Applications to start from, with `composer create-project`. Each one wires the p
 
 | Starter | What it is | Version |
 |---|---|---|
-| [Skeleton](/guide/getting-started)<br>`solophp/skeleton` | A JSON API: one CRUD module, input validation, SQLite, error handling, logging and feature tests | [![solophp/skeleton](https://img.shields.io/packagist/v/solophp/skeleton?label=)](https://packagist.org/packages/solophp/skeleton) |
+| [Skeleton](/guide/getting-started)<br>`solophp/skeleton` | A JSON API: CRUD modules under `src/Modules/`, input validation with a generated schema endpoint, SQLite, error handling, logging and feature tests | [![solophp/skeleton](https://img.shields.io/packagist/v/solophp/skeleton?label=)](https://packagist.org/packages/solophp/skeleton) |
 | [Inertia Svelte Skeleton](/guide/inertia)<br>`solophp/inertia-svelte-skeleton` | Server-side routing and controllers with a single-page front end in Inertia.js 3, Svelte 5 and Vite | [![solophp/inertia-svelte-skeleton](https://img.shields.io/packagist/v/solophp/inertia-svelte-skeleton?label=)](https://packagist.org/packages/solophp/inertia-svelte-skeleton) |
 
 ## HTTP Kernel
