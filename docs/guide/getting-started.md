@@ -543,7 +543,7 @@ The skeleton runs on MySQL and PostgreSQL too: set `DB_DRIVER` and the `DB_*` va
 - `TaskIndexInput` and `TaskController::index()` in the skeleton show filters, search, sorting and pagination.
 - `GET /tasks/schema` answers with the input contract of `POST /tasks`, built from `TaskStoreInput` by `InputFactory::schema()`.
 - [Input](https://solophp.github.io/Input/): casters, processors, nested inputs and partial updates.
-- [Repository](https://solophp.github.io/Repository/): criteria, relations, translations and transactions.
+- [Repository](https://solophp.github.io/Repository/): criteria, relations, translations, pages and transactions.
 - [Router](https://solophp.github.io/Router/) and [Application](https://solophp.github.io/Application/): route groups and middleware, the request lifecycle and the route cache.
 - [Container](https://solophp.github.io/Container/): interface binding, lazy services and injection by id.
 - [Packages](/packages): everything else Solo has, from caching to a job queue.

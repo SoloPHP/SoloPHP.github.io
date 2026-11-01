@@ -38,7 +38,7 @@ Reading and writing what the application keeps.
 
 | Package | What it does | Version |
 |---|---|---|
-| [Repository](https://solophp.github.io/Repository/)<br>`solophp/repository` | Typed repositories over Doctrine DBAL: criteria arrays, your own readonly models, translations with a fallback and batch-loaded relations. | [![solophp/repository](https://img.shields.io/packagist/v/solophp/repository?label=)](https://packagist.org/packages/solophp/repository) |
+| [Repository](https://solophp.github.io/Repository/)<br>`solophp/repository` | Typed repositories over Doctrine DBAL: criteria arrays, your own readonly models, translations with a fallback, batch-loaded relations, stable pages with their total and transaction boundaries. | [![solophp/repository](https://img.shields.io/packagist/v/solophp/repository?label=)](https://packagist.org/packages/solophp/repository) |
 | [Cache](https://github.com/SoloPHP/Cache#readme)<br>`solophp/cache` | PSR-16 cache with file and Redis adapters, and TTLs in seconds or as a `DateInterval`. | [![solophp/cache](https://img.shields.io/packagist/v/solophp/cache?label=)](https://packagist.org/packages/solophp/cache) |
 
 ## Infrastructure
