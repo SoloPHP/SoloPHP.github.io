@@ -47,7 +47,7 @@ One module, a task list, shows the parts of Inertia working together:
 | [solophp/application](https://solophp.github.io/Application/), [solophp/router](https://solophp.github.io/Router/), [solophp/container](https://solophp.github.io/Container/) | The PSR-15 kernel, routes and the URLs made from their names, the container |
 | [solophp/input](https://solophp.github.io/Input/), [solophp/validator](https://solophp.github.io/Validator/) | Typed form inputs and the rules behind `#[Validate]` |
 | [solophp/repository](https://solophp.github.io/Repository/) | The `tasks` table |
-| [solophp/logger](https://solophp.github.io/Logger/), [solophp/dotenv](https://github.com/SoloPHP/Dotenv#readme), [solophp/http-emitter](https://github.com/SoloPHP/HTTP-Emitter#readme) | Logging, `.env`, sending the response |
+| [solophp/logger](https://solophp.github.io/Logger/), [solophp/dotenv](https://solophp.github.io/Dotenv/), [solophp/http-emitter](https://github.com/SoloPHP/HTTP-Emitter#readme) | Logging, `.env`, sending the response |
 
 Next to the layout of the JSON API starter, the project has `resources/` for the front end: `views/app.php` is the HTML document of a first visit, `js/app.js` the client's entry point, `js/Layouts/AppLayout.svelte` the layout of every page, and `js/Pages/` one Svelte component per page.
 
