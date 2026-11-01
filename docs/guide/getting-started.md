@@ -432,7 +432,7 @@ The new module passes all three, PHPStan included: the types in the docblocks ab
 
 ## Add Another Package
 
-Each Solo package joins the application the same way: `composer require`, a provider, and a line in `config/providers.php`. Here, [solophp/event-dispatcher](https://github.com/SoloPHP/Event-Dispatcher#readme) logs every new note:
+Each Solo package joins the application the same way: `composer require`, a provider, and a line in `config/providers.php`. Here, [solophp/event-dispatcher](https://solophp.github.io/Event-Dispatcher/) logs every new note:
 
 ```bash
 composer require solophp/event-dispatcher
