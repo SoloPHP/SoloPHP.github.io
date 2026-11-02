@@ -37,7 +37,7 @@ features:
     linkText: Data packages
   - icon: 🧰
     title: Infrastructure
-    details: 'Logger, Dotenv, Event-Dispatcher, Job-Queue, HTTP-Client and Session, on PSR-3, PSR-14 and PSR-18 where there is a standard.'
+    details: 'Logger, Dotenv, Event-Dispatcher, Job-Queue, Rate-Limiter, HTTP-Client and Session, on PSR-3, PSR-14 and PSR-18 where there is a standard.'
     link: /packages#infrastructure
     linkText: Infrastructure packages
   - icon: ⚡
