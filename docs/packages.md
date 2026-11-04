@@ -53,7 +53,6 @@ The services around the request: configuration, logs, events, background jobs an
 | [Job-Queue](https://solophp.github.io/Job-Queue/)<br>`solophp/job-queue` | Database-backed job queue on Doctrine DBAL for MySQL, MariaDB, PostgreSQL and SQLite: claims with ownership tokens and expiring leases, a retry policy and deadline stored with each job, and a long-running worker. | [![solophp/job-queue](https://img.shields.io/packagist/v/solophp/job-queue?label=)](https://packagist.org/packages/solophp/job-queue) |
 | [Rate-Limiter](https://github.com/SoloPHP/Rate-Limiter#readme)<br>`solophp/rate-limiter` | Atomic per-key rate limits: fixed or renewable windows in Redis, where one Lua script checks and counts each hit, and an in-memory twin with the same contract for tests. | [![solophp/rate-limiter](https://img.shields.io/packagist/v/solophp/rate-limiter?label=)](https://packagist.org/packages/solophp/rate-limiter) |
 | [HTTP-Client](https://solophp.github.io/HTTP-Client/)<br>`solophp/http-client` | Immutable PSR-18 client on Guzzle with a fluent API. Retries are opt-in and never repeat a POST the server may have processed, credentials go only to the origin of the base URI, files are attached only explicitly, and secrets are masked in logs and exceptions. | [![solophp/http-client](https://img.shields.io/packagist/v/solophp/http-client?label=)](https://packagist.org/packages/solophp/http-client) |
-| [Session](https://github.com/SoloPHP/Session#readme)<br>`solophp/session` | Session handling with secure defaults: an idle timeout, fixation protection, and IP and User-Agent checks. | [![solophp/session](https://img.shields.io/packagist/v/solophp/session?label=)](https://packagist.org/packages/solophp/session) |
 
 ## Frontend
 
@@ -72,4 +71,4 @@ These packages are no longer developed. They stay on Packagist, so projects that
 | `solophp/base-repository` | [solophp/repository](https://solophp.github.io/Repository/) |
 | `solophp/task-queue` | [solophp/job-queue](https://solophp.github.io/Job-Queue/) |
 | `solophp/database`, `solophp/query-builder` | [Doctrine DBAL](https://www.doctrine-project.org/projects/dbal.html), with [solophp/repository](https://solophp.github.io/Repository/) |
-| `solophp/configs`, `solophp/settings`, `solophp/storage`, `solophp/paginator`, `solophp/translate`, `solophp/formatter`, `solophp/flash-messages`, `solophp/image-uploader`, `solophp/utilities` | No successor |
+| `solophp/configs`, `solophp/settings`, `solophp/storage`, `solophp/paginator`, `solophp/translate`, `solophp/formatter`, `solophp/flash-messages`, `solophp/image-uploader`, `solophp/session`, `solophp/utilities` | No successor |
