@@ -60,6 +60,7 @@ The services around the request: configuration, logs, events, background jobs an
 | Package | What it does | Version |
 |---|---|---|
 | [Inertia](https://solophp.github.io/Inertia/)<br>`solophp/inertia` | Inertia.js 3 server adapter for PSR-7 and PSR-15: pages, partial reloads, deferred, merge and once props, flash data, history encryption, server-side rendering and Precognition. | [![solophp/inertia](https://img.shields.io/packagist/v/solophp/inertia?label=)](https://packagist.org/packages/solophp/inertia) |
+| [Vite](https://github.com/SoloPHP/Vite#readme)<br>`solophp/vite` | The tags that load Vite entries into a page without a framework: from the dev server while a hot file names it, otherwise from the build manifest, with the CSS and modulepreload links of every imported chunk. An asset version for Inertia and a `vite()` Twig function come with it. | [![solophp/vite](https://img.shields.io/packagist/v/solophp/vite?label=)](https://packagist.org/packages/solophp/vite) |
 
 ## Legacy
 
