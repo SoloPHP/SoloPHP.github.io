@@ -44,6 +44,7 @@ One module, a task list, shows the parts of Inertia working together:
 |---|---|
 | [solophp/inertia](https://solophp.github.io/Inertia/) | Pages, redirects with errors and messages, deferred and once props, Precognition, the Inertia protocol |
 | [@inertiajs/svelte](https://inertiajs.com), [Svelte 5](https://svelte.dev), [Vite](https://vite.dev) | The client: pages, links, forms and partial reloads; the dev server and the build |
+| [solophp/vite](https://github.com/SoloPHP/Vite#readme) | The tags of the root template that load the build or the dev server, and the asset version that reloads a page running other assets |
 | [solophp/application](https://solophp.github.io/Application/), [solophp/router](https://solophp.github.io/Router/), [solophp/container](https://solophp.github.io/Container/) | The PSR-15 kernel, routes and the URLs made from their names, the container |
 | [solophp/input](https://solophp.github.io/Input/), [solophp/validator](https://solophp.github.io/Validator/) | Typed form inputs and the rules behind `#[Validate]` |
 | [solophp/repository](https://solophp.github.io/Repository/) | The `tasks` table |
